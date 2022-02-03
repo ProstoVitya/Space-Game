@@ -35,10 +35,12 @@ public class Mover : MonoBehaviour
     public static void StopGame()
     {
         _frontSpeed = 0f;
+        _direction = 0;
     }
 
     public static void StartGame()
     {
+        _direction = 0;
         _frontSpeed = 5f;
     }
 }

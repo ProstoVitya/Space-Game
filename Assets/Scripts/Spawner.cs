@@ -3,14 +3,26 @@
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class Spawner : MonoBehaviour
 {
-
+    [Header("Objects To Spawn")]
     [SerializeField] private GameObject _cube;
     [SerializeField] private GameObject _platform;
+
+    [Header("Objects Color")]
+    [SerializeField] private Gradient _gradient;
+    [SerializeField] private float _timeBetweenChanges;
+    [Range(0f, 1f)] private float _timeProgress;
 
     private void Start()
     {
         BuildBounds();
         BuildLine();
+    }
+
+    private void FixedUpdate()
+    {
+        _timeProgress += Time.deltaTime / _timeBetweenChanges;
+        if (_timeProgress >= 1f)
+            _timeProgress = 0f;
     }
 
     private void OnTriggerExit(Collider other)
@@ -39,6 +51,6 @@ public class Spawner : MonoBehaviour
     {
         var cubePosition = new Vector3(spawner.position.x, height / 2, spawner.position.z);
         GameObject spawnedCube = Instantiate(_cube, cubePosition, Quaternion.identity);
-        spawnedCube.transform.localScale = new Vector3(1f, height, 1f);
+        spawnedCube.GetComponent<Renderer>().material.color = _gradient.Evaluate(_timeProgress);        spawnedCube.transform.localScale = new Vector3(1f, height, 1f);
     }
 }
