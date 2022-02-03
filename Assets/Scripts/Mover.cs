@@ -4,20 +4,41 @@
 
 public class Mover : MonoBehaviour
 {
-    
-    private float _frontSpeed = 5f;
+    private static int _direction = 0;
+    private static float _frontSpeed = 5f;
     private float _sideSpeed = 5f;
 
-    void Update()
+    private void Start()
     {
-        float xCoordinate = DataHandler.ShipRotation == Rotation.NONE ? 0f :
-            DataHandler.ShipRotation == Rotation.LEFT ? -1 : 1;
-        transform.position += new Vector3(xCoordinate * _sideSpeed * Time.deltaTime,
+        DataHandler.StartGame();
+        StartGame();
+    }
+
+    private void Update()
+    {
+        transform.position += new Vector3(_direction * _sideSpeed * Time.deltaTime,
                     0f, _frontSpeed * Time.deltaTime);
     }
 
-    public void Rotate(Rotation rotation)
+    public static void RotateShip(Rotation rotation)
     {
-        DataHandler.ShipRotation = rotation;
+        if (rotation == Rotation.LEFT)
+        {
+            --_direction;
+        }
+        else if (rotation == Rotation.RIGHT)
+        {
+            ++_direction;
+        }
+    }
+
+    public static void StopGame()
+    {
+        _frontSpeed = 0f;
+    }
+
+    public static void StartGame()
+    {
+        _frontSpeed = 5f;
     }
 }

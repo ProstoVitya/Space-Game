@@ -11,13 +11,13 @@ public class RotationButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        DataHandler.ShipRotation = _rotation;
+        Mover.RotateShip(_rotation);
         _rotationAnimation.Invoke();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        DataHandler.ShipRotation = Rotation.NONE;
+        Mover.RotateShip(_rotation == Rotation.LEFT ? Rotation.RIGHT : Rotation.LEFT);
         _backAnimation.Invoke();
     }
 }
