@@ -8,9 +8,10 @@ public enum Rotation
 
 public static class DataHandler
 {
-    public static bool GameOver { get; private set; }
     public static Rotation ShipRotation = Rotation.NONE;
     public static int FoundedResouses = 0;
+
+    public static bool GameOver { get; private set; }
 
     public static void StartGame()
     {

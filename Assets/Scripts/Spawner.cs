@@ -4,12 +4,17 @@
 public class Spawner : MonoBehaviour
 {
     [Header("Objects To Spawn")]
+    [Tooltip("Oblects from which obstacles are built")]
     [SerializeField] private GameObject _cube;
+    [Tooltip("An object to halp track when to build a new line of obstacles")]
     [SerializeField] private GameObject _platform;
+    [Tooltip("Gems that gives money")]
     [SerializeField] private GameObject[] _valuableResources;
 
     [Header("Objects Color")]
+    [Tooltip("The colors that the field will take on during the game")]
     [SerializeField] private Gradient _gradient;
+    [Tooltip("Color change rate")]
     [SerializeField] private float _timeBetweenChanges;
     [Range(0f, 1f)] private float _timeProgress;
 

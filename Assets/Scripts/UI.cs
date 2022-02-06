@@ -3,7 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
+    [Tooltip("The main screen of the game")]
     [SerializeField] private GameObject _gameScreen;
+    [Tooltip("Death screen")]
     [SerializeField] private GameObject _restartMenu;
 
     private void Update()

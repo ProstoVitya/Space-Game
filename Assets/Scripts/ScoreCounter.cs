@@ -4,6 +4,7 @@ using TMPro;
 [RequireComponent(typeof(TMP_Text))]
 public class ScoreCounter : MonoBehaviour
 {
+    [Tooltip("An object that moves during the game")]
     [SerializeField] private Transform _gameField;
     private TMP_Text _scoreText;
 
