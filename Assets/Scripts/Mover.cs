@@ -10,6 +10,10 @@ public class Mover : MonoBehaviour
 
     private void Start()
     {
+        //Move into main menu
+        if (!PlayerPrefs.HasKey("Money"))
+            PlayerPrefs.SetInt("Money", 0);
+        
         DataHandler.StartGame();
         StartGame();
     }

@@ -7,9 +7,12 @@ public class Spaceship : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        DataHandler.StopGame();
-        GetComponent<Rigidbody>().useGravity = true;
-        Mover.StopGame();
+        if (!DataHandler.GameOver)
+        {
+            DataHandler.StopGame();
+            GetComponent<Rigidbody>().useGravity = true;
+            Mover.StopGame();
+        }
     }
 
     public void AnimationInvoke(int direction)

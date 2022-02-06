@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
     [Header("Objects To Spawn")]
     [SerializeField] private GameObject _cube;
     [SerializeField] private GameObject _platform;
+    [SerializeField] private GameObject[] _valuableResources;
 
     [Header("Objects Color")]
     [SerializeField] private Gradient _gradient;
@@ -51,6 +52,15 @@ public class Spawner : MonoBehaviour
     {
         var cubePosition = new Vector3(spawner.position.x, height / 2, spawner.position.z);
         GameObject spawnedCube = Instantiate(_cube, cubePosition, Quaternion.identity);
-        spawnedCube.GetComponent<Renderer>().material.color = _gradient.Evaluate(_timeProgress);        spawnedCube.transform.localScale = new Vector3(1f, height, 1f);
+        spawnedCube.GetComponent<Renderer>().material.color = _gradient.Evaluate(_timeProgress);
+        spawnedCube.transform.localScale = new Vector3(1f, height, 1f);
+
+        if (height < 3f && Random.Range(0, 20) == 19)
+        {
+            int random = Random.Range(0, 20);
+            var objectPosition = new Vector3(spawner.position.x, 1.5f, spawner.position.z);
+                Instantiate(_valuableResources[random == 19 ? 2 : random > 14 ? 1 : 0],
+                    objectPosition, _valuableResources[0].transform.rotation);
+        }
     }
 }
