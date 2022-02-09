@@ -4,18 +4,29 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class Spaceship : MonoBehaviour
 {
+    public int StartHealth = 1;
+
+    private HealthCounter _healthUI;
+
+    public int Health { get; private set; }
+
+    private void Start()
+    {
+        Health = StartHealth;
+        _healthUI = FindObjectOfType<HealthCounter>();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!DataHandler.GameOver)
-        {
-            DataHandler.StopGame();
-            GetComponent<Rigidbody>().useGravity = true;
-            Mover.StopGame();
-        }
+        --Health;
+        _healthUI.DrawHealth(Health);
+        Destroy(collision.gameObject);
+        /*GameManager.StopGame();
+        GetComponent<Rigidbody>().useGravity = true;
+        Mover.StopGame();*/
     }
 
-    public void AnimationInvoke(int direction)
+    public void InvokeAnimation(int direction)
     {
         StartCoroutine(Rotate(direction));
     }

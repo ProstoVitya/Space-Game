@@ -14,7 +14,7 @@ public class Mover : MonoBehaviour
         if (!PlayerPrefs.HasKey("Money"))
             PlayerPrefs.SetInt("Money", 0);
         
-        DataHandler.StartGame();
+        //DataHandler.StartGame();
         StartGame();
     }
 

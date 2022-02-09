@@ -10,7 +10,7 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
-        if (DataHandler.GameOver)
+        if (GameManager.GameOver)
         {
             _gameScreen.SetActive(false);
             _restartMenu.SetActive(true);
