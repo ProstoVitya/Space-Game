@@ -26,7 +26,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (_spaceShip.Health == 0 && !GameOver)
+        {
             EndGame();
+            Mover.StopMove();
+        }
     }
 
     private static IEnumerator WatchAds()
