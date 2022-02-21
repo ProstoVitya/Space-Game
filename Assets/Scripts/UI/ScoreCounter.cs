@@ -4,6 +4,9 @@ using TMPro;
 [RequireComponent(typeof(TMP_Text))]
 public class ScoreCounter : MonoBehaviour
 {
+    [Tooltip("Score is z coordinate of this object ")]
+    [SerializeField] Transform _gameFieldTransform;
+
     private TMP_Text _scoreText;
     private float _scoreCounter;
 
@@ -16,6 +19,6 @@ public class ScoreCounter : MonoBehaviour
     private void Update()
     {
         _scoreText.text = _scoreCounter.ToString("0.0");
-        _scoreCounter += Time.deltaTime;
+        _scoreCounter = _gameFieldTransform.position.z;
     }
 }

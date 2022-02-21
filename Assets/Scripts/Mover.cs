@@ -8,8 +8,14 @@ public class Mover : MonoBehaviour
 
     private const float SideSpeed = 5f;
     private const float SpeedIncrease = 1.00005f;
+    private Transform _transform;
 
     public TMP_Text speedText;
+
+    private void Awake()
+    {
+        _transform = transform;
+    }
 
     private void Start()
     {
@@ -21,7 +27,7 @@ public class Mover : MonoBehaviour
 
     private void Update()
     {
-        transform.position += new Vector3(_direction * SideSpeed * Time.deltaTime,
+        _transform.position += new Vector3(_direction * SideSpeed * Time.deltaTime,
                     0f, _frontSpeed * Time.deltaTime);
         _frontSpeed *= SpeedIncrease;
         speedText.text = _frontSpeed.ToString();

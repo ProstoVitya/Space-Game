@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     public static bool GameOver { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         DataHandler.FoundedResouses = 0;
         GameOver = false;

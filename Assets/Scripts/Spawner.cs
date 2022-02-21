@@ -18,6 +18,13 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _timeBetweenChanges;
     [Range(0f, 1f)] private float _timeProgress;
 
+    private Transform _transform;
+
+    private void Awake()
+    {
+        _transform = transform;
+    }
+
     private void Start()
     {
         BuildBounds();
@@ -39,18 +46,18 @@ public class Spawner : MonoBehaviour
 
     private void BuildBounds()
     {
-        SpawnCube(transform.GetChild(0), Random.Range(3f, 5f));
-        SpawnCube(transform.GetChild(transform.childCount - 1), Random.Range(3f, 5f));
+        SpawnCube(_transform.GetChild(0), Random.Range(3f, 5f));
+        SpawnCube(_transform.GetChild(_transform.childCount - 1), Random.Range(3f, 5f));
     }
 
     private void BuildLine()
     {
-        for (int i = 1; i < transform.childCount - 1; ++i)
+        for (int i = 1; i < _transform.childCount - 1; ++i)
         {
             int random = Random.Range(1, 10);
-            SpawnCube(transform.GetChild(i), random == 9 ? Random.Range(3f, 5f) : Random.Range(0.1f, 1f));
+            SpawnCube(_transform.GetChild(i), random == 9 ? Random.Range(3f, 5f) : Random.Range(0.1f, 1f));
         }
-        Instantiate(_platform, transform.transform.position + new Vector3(0, -1, 0), Quaternion.identity);
+        Instantiate(_platform, _transform.transform.position + new Vector3(0, -1, 0), Quaternion.identity);
     }
 
     private void SpawnCube(Transform spawner, float height)

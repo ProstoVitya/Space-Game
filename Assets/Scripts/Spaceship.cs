@@ -21,8 +21,14 @@ public class Spaceship : MonoBehaviour
     [SerializeField] private ParticleSystem _collisionEffect;
 
      private HealthCounter _healthUI;
+    private Transform _transform;
 
     public int Health { get; private set; }
+
+    private void Awake()
+    {
+        _transform = transform;
+    }
 
     private void Start()
     {
@@ -42,7 +48,7 @@ public class Spaceship : MonoBehaviour
             SetCollisionTime();
         }
         Destroy(collision.gameObject);
-        Instantiate(_collisionEffect, collision.transform.position + Vector3.forward, Quaternion.identity);
+        Instantiate(_collisionEffect, _transform.position + Vector3.forward, Quaternion.identity);
         //_collisionSound.Play();
     }
 
@@ -60,7 +66,7 @@ public class Spaceship : MonoBehaviour
     {
         for (int i = 0; i < 15; ++i)
         {
-            transform.Rotate(0, 0, direction);
+            _transform.Rotate(0, 0, direction);
             yield return null;
         }
     }
